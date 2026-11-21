@@ -441,8 +441,9 @@ end
 
 -- /ofa plugin_<name> [rest]: a plugin's own command, one per plugin. Every /ofa word starting with "plugin_" is the
 -- plugins', and every other one stays OneForAll's, so a new OneForAll command never takes a plugin's.
--- * The word comes from the plugin's folder name, without "OneForAll_" (OneForAll_DungeonTracker ->
---   plugin_dungeontracker). Folder names are unique, so two plugins never share one.
+-- * The word comes from the plugin's folder name, in lower case: MyBosses -> plugin_mybosses. A leading "OneForAll_"
+--   (or "OneForAll-") is dropped, so OneForAll_DungeonTracker -> plugin_dungeontracker. Folder names are unique, so
+--   two plugins never share one.
 -- * alias (optional): a short name as well (alias "dt" -> plugin_dt), for the first plugin that asks for it.
 -- fn(rest) gets what follows the word ("" when nothing does; in lower case: the plugin reads its own sub-commands
 -- from it). help: one line, shown by /ofa plugins and on the plugin's page.
