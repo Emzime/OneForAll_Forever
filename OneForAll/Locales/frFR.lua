@@ -2333,4 +2333,6 @@ FLT.LOCALES.frFR = function() return {
   ["This plugin has no options."] = "Ce plugin n'a pas d'options.",
   ["This plugin is turned off. Turn it on and reload to see its options."] = "Ce plugin est désactivé. Activez-le et rechargez pour voir ses options.",
   ["On"] = "Activé",
+  ["Command: %s"] = "Commande : %s",
+  ["No plugin answers to /ofa %s. /ofa plugins lists the plugins' commands."] = "Aucun plugin ne répond à /ofa %s. /ofa plugins liste les commandes des plugins.",
 } end

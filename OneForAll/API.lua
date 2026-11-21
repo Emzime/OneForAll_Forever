@@ -32,7 +32,7 @@ local api = { VERSION = 1 }
 local plugins = {}            -- [name] = { name, version, title }
 local callbacks = {}          -- [event] = { fn, ... }
 local pluginSettings = {}     -- [plugin name] = { section defs, in order }: the Plugins page
-FLT.PluginSlash = {}          -- [word] = { fn, help }, read by the /ofa command in Core.lua
+FLT.PluginSlash = {}          -- [word] = { fn, help }, read by the /ofa command in Core.lua ("plugin_<x>", "plugins")
 
 local function safe(tag, fn, ...) if FLT.SafeCall then return FLT.SafeCall(tag, fn, ...) end return pcall(fn, ...) end
 
@@ -158,6 +158,13 @@ function api.SafeCall(tag, fn, ...) return safe(tag, fn, ...) end
 
 -- tells OneForAll a plugin is there: name = its addon folder, info = { version = "1.0.0", title = "Dungeon Tracker" }.
 -- Shown with /ofa plugins. A name already taken stays with its first plugin.
+-- A plugin's command word: "plugin_" + its name without the "OneForAll_" prefix, in lower case
+-- (OneForAll_DungeonTracker -> plugin_dungeontracker). Addon folder names are unique, so the words are too.
+local function commandWord(name)
+  local short = name:gsub("^[Oo]ne[Ff]or[Aa]ll[_%-]?", "")
+  if short == "" then short = name end
+  return "plugin_" .. (short:lower():gsub("[^%w_]", ""))
+end
 function api.RegisterPlugin(name, info)
   if type(name) ~= "string" or name == "" or plugins[name] then return false end
   info = type(info) == "table" and info or {}
@@ -166,7 +173,9 @@ function api.RegisterPlugin(name, info)
 end
 function api.GetPlugins()
   local list = {}
-  for _, p in pairs(plugins) do list[#list + 1] = { name = p.name, version = p.version, title = p.title } end
+  for _, p in pairs(plugins) do
+    list[#list + 1] = { name = p.name, version = p.version, title = p.title, command = p.command, alias = p.alias }
+  end
   table.sort(list, function(a, b) return a.name < b.name end)
   return list
 end
@@ -430,14 +439,38 @@ end
 
 -- Slash commands ----------------------------------------------------------------------------------------------------
 
--- /ofa <word> [rest]: fn(rest) gets what follows the word (lower case). OneForAll's own commands come first; a word
--- another plugin has stays with it.
-function api.RegisterSlashCommand(word, fn, help)
-  if type(word) ~= "string" or type(fn) ~= "function" then return false end
-  word = word:lower():match("^%s*(%S+)")
-  if not word or FLT.PluginSlash[word] then return false end
-  FLT.PluginSlash[word] = { fn = fn, help = help }
-  return true
+-- /ofa plugin_<name> [rest]: a plugin's own command, one per plugin. Every /ofa word starting with "plugin_" is the
+-- plugins', and every other one stays OneForAll's, so a new OneForAll command never takes a plugin's.
+-- * The word comes from the plugin's folder name, without "OneForAll_" (OneForAll_DungeonTracker ->
+--   plugin_dungeontracker). Folder names are unique, so two plugins never share one.
+-- * alias (optional): a short name as well (alias "dt" -> plugin_dt), for the first plugin that asks for it.
+-- fn(rest) gets what follows the word ("" when nothing does; in lower case: the plugin reads its own sub-commands
+-- from it). help: one line, shown by /ofa plugins and on the plugin's page.
+-- Returns the command ("/ofa plugin_dungeontracker") and the alias's ("/ofa plugin_dt", or nil when not given or
+-- taken), or false (plugin not registered, or already has a command).
+local function plainWord(s) return (tostring(s):lower():gsub("[^%w_]", "")) end
+function api.RegisterSlashCommand(name, fn, help, alias)
+  local p = type(name) == "string" and plugins[name]
+  if not p or type(fn) ~= "function" or p.command then return false end
+  local word = commandWord(name)
+  if FLT.PluginSlash[word] then return false end
+  local entry = { fn = fn, help = type(help) == "string" and help or nil, plugin = name }
+  FLT.PluginSlash[word] = entry
+  p.command = "/ofa " .. word
+  if type(alias) == "string" then
+    local short = plainWord(alias)
+    local aw = short ~= "" and ("plugin_" .. short) or nil
+    if aw and not FLT.PluginSlash[aw] then
+      FLT.PluginSlash[aw] = entry
+      p.alias = "/ofa " .. aw
+    end
+  end
+  return p.command, p.alias
+end
+
+-- /ofa plugin_<something> that no plugin has (called by Core.lua): say so, rather than opening the window
+function FLT.PluginSlashUnknown(word)
+  api.Print(string.format(api.Translate("No plugin answers to /ofa %s. /ofa plugins lists the plugins' commands."), word))
 end
 
 -- Widgets: OneForAll's look, on frames of your own -------------------------------------------------------------------
@@ -680,6 +713,10 @@ local function createPluginsPanel(parent)
     local head = section(page, state, p.title .. "  |cff9d9d9d" .. p.version .. "|r", "Interface\\Icons\\INV_Misc_Gear_08")
     if p.notes and p.notes ~= "" then head:text(p.notes) end
     if p.author and p.author ~= "" then head:text(string.format(L["By %s"], p.author)) end
+    local reg = plugins[p.name]
+    if reg and reg.command then
+      head:text(string.format(L["Command: %s"], reg.command .. (reg.alias and ("  |cff9d9d9d(" .. reg.alias .. ")|r") or "")))
+    end
     -- the switch, and right of it the Reload button once there is something to apply
     local reload
     local rowY = head.y
@@ -788,9 +825,14 @@ local function lock(t)
 end
 OneForAllAPI = lock(api)
 
--- /ofa plugins: the plugins that registered
-api.RegisterSlashCommand("plugins", function()
+-- /ofa plugins: the plugins that registered, with their command (OneForAll's own word, not a plugin's)
+FLT.PluginSlash.plugins = { fn = function()
   local list = api.GetPlugins()
   if #list == 0 then api.Print(api.Translate("No plugins.")) return end
-  for _, p in ipairs(list) do api.Print(p.title .. " " .. p.version .. " (" .. p.name .. ")") end
-end)
+  for _, p in ipairs(list) do
+    api.Print(p.title .. " " .. p.version .. (p.command and ("  -  " .. p.command) or "")
+      .. (p.alias and (" (" .. p.alias .. ")") or ""))
+    local h = p.command and FLT.PluginSlash[p.command:sub(6)]
+    if h and h.help then api.Print("    " .. h.help) end
+  end
+end }
