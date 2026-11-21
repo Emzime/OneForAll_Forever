@@ -2321,4 +2321,16 @@ FLT.LOCALES.frFR = function() return {
   ["Smaller changes"] = "Petits changements",
   ["Skill-Up Helper: buy bolts, leather and other intermediates ready-made or craft them (with the cost difference), and the switch \"Don't use own materials\"."] = "Assistant de progression : achetez rouleaux, cuir et autres produits intermédiaires tout prêts ou fabriquez-les (avec la différence de coût), et l'option \"Ne pas utiliser mes composants\".",
   ["World Map: low level (grey) quests can be shown again, and the walking routes of quest givers can be hidden (Quality of Life > World Map)."] = "Carte du monde : les quêtes de bas niveau (grises) peuvent de nouveau s'afficher et les trajets des donneurs de quêtes peuvent être masqués (Confort > Carte du monde).",
+  -- plugins (API.lua)
+  ["No plugins."] = "Aucun plugin.",
+  ["Plugins installed for OneForAll, their options, on or off."] = "Les plugins installés pour OneForAll, leurs options, activés ou non.",
+  ["Plugins"] = "Plugins",
+  ["Addons that plug into OneForAll. Their options are saved in the profile this character uses."] = "Addons qui se branchent sur OneForAll. Leurs options sont enregistrées dans le profil de ce personnage.",
+  ["By %s"] = "Par %s",
+  ["Enabled"] = "Activé",
+  ["Turns the plugin on or off, as in the game's AddOns list. The change applies after a reload."] = "Active ou désactive le plugin, comme dans la liste des AddOns du jeu. Le changement s'applique après un rechargement.",
+  ["Options"] = "Options",
+  ["This plugin has no options."] = "Ce plugin n'a pas d'options.",
+  ["This plugin is turned off. Turn it on and reload to see its options."] = "Ce plugin est désactivé. Activez-le et rechargez pour voir ses options.",
+  ["On"] = "Activé",
 } end
