@@ -7,7 +7,7 @@ local ADDON, FLT = ...
 -- updated without touching the plugins, and a plugin without touching OneForAll.
 --
 --   local API = OneForAllAPI
---   if not (API and API.VERSION >= 2) then return end
+--   if not (API and API.VERSION >= 1) then return end
 --
 -- A plugin can READ everything OneForAll knows, and DO what this file offers. It can never change OneForAll:
 --   * API.Data: all of OneForAll's data (dungeons, quests, items, sets, professions, books, pets, talents, maps...),
@@ -26,9 +26,9 @@ local ADDON, FLT = ...
 --   * Name your own saved variables after your plugin, so they never meet OneForAll's.
 --   * Register settings and slash commands while your addon loads (before the player opens the window).
 --
--- Proposed for OneForAll 6.2.11; first user: the Dungeon Tracker plugin (OneForAll_DungeonTracker).
+-- Proposed for OneForAll 6.2.12; first user: the Dungeon Tracker plugin (OneForAll_DungeonTracker).
 
-local api = { VERSION = 3 }
+local api = { VERSION = 1 }
 local plugins = {}            -- [name] = { name, version, title }
 local callbacks = {}          -- [event] = { fn, ... }
 local pluginSettings = {}     -- [plugin name] = { section defs, in order }: the Plugins page
