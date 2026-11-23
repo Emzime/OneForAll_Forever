@@ -71,6 +71,34 @@ and add the file to OneForAll.toc before UI\MainFrame.lua.
 Changelog (newest first)
 ========================
 
+6.2.14 - Dungeon tracker, History, OneForAll in colour and many fixes
+=====================================================================
+- New: Dungeon tracker (on by default; Quality of Life > Interface > Dungeons & Raids, with a "Test" button): a small window
+  in dungeons and raids with the run's time (best time, difference when finished), the mobs' XP, the gold, the instances of
+  this hour (one per instance copy) and a portrait per boss - red X when dead, green arrow for an upgrade in its loot, star
+  for your wishlist, "!" when a quest needs it; rare bosses in their own row (not needed to finish a run). Left-click a boss:
+  OneForAll on that boss, right-click: its loot under the tracker. Quest and map buttons, the dungeon's picture behind it,
+  the cog for its settings (hide time / XP / gold / bosses, bosses per row 4-6, lock, opacity), drag to move, corner to
+  resize, X or /ofa tracker hides it until you leave the dungeon, /ofa tracker test. A reset dungeon starts a new run by itself.
+- New: Dungeons & Raids > History - every run of this character with time, deaths, mobs, XP, gold, the bosses with their
+  kill time and your loot, best and average time per dungeon.
+- New: the dungeon map crosses off the bosses killed in your current run.
+- New: Settings > Window - your own background colour and text colour ("Default" brings the normal look back).
+- New: Crafting List breaks bars down into ore (smelting recipes); Hunter Pets: 167 more beasts that teach an ability rank.
+- Armory: Bind on Equip world drops in the suggestions ("World drop"); PvP pieces marked in the BiS List; no more "Not in
+  Forever yet" sets; hunters get no thrown weapons; class quest rewards from dungeons only for that class.
+- Gear Planner: no more lag in full cities and no freezes with big lists (Cheap Upgrades, "All slots") - it loads missing
+  items first ("Loading items") and works in small steps.
+- Gear Value: grey "About the same value" line; no error with "Gear Value shows: Both".
+- Cheap Upgrade Scan: clear steps (Waiting for server / Reading % / Loading items) and up to 60 seconds wait for the server.
+- BiS List: newest lists from wowtbc.gg, new Survival Melee for hunters.
+- Fixes: short green stats only in the game's own tooltips (Dugi Guides error); no Duskwood Missions at Field Captain
+  Palandar; Forever totem chains and Skyborne class quests; dungeon quests that can no longer be taken show "No longer
+  available"; The Drowned City (Horde) dungeon quest; no buff reminder for another class's buff; main tabs and profession
+  tabs fit longer languages; spell rank update with the Gamepad UI; gold "This session"; Shining Silver Breastplate at 130;
+  two recipe fixes; new ley lines in Winterspring and Mount Hyjal.
+- Quest data: QuestieDB e3c3bc4.
+
 6.2.13 - BiS List, Cheap Upgrades, new stat weights and many fixes
 ==================================================================
 Armory

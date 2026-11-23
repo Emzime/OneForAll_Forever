@@ -353,7 +353,7 @@ local function createPopup()
 
   local sub = FLT.NewFS(popup, nil, "OVERLAY", "GameFontHighlightSmall")
   sub:SetPoint("TOPLEFT", 14, -32); sub:SetWidth(440); sub:SetJustifyH("LEFT")
-  sub:SetTextColor(FLT.SkinC(0.80, 0.77, 0.68))
+  sub:SetTextColor(FLT.TextC(0.80, 0.77, 0.68))
   popup.sub = sub
 
   for i = 1, MAX_ROWS do
