@@ -110,15 +110,6 @@ FLT.DUNGEON_REGISTRY["Scarlet Monastery: Graveyard"] = {
                 {274291, "Polished Skullcap", "Head, Mail", 3},
             },
         },
-        {
-            description = "Only during the Scourge Invasion event.",
-            name = "Scorn",
-            npcID = 14693,
-            displayID = 16197, -- CMaNGOS classic-db creature_template (user 23.11.2026)
-            loot = {
-                {23169, "Scorn's Icy Choker", "Neck", 3},
-            },
-        },
     },
     trashLoot = {
         {7730, "Cobalt Crusher", "Two-Hand, Mace", 3},
