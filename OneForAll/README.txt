@@ -71,6 +71,20 @@ and add the file to OneForAll.toc before UI\MainFrame.lua.
 Changelog (newest first)
 ========================
 
+6.2.16 - Hotfix: boss lists for a clean dungeon tracker
+=======================================================
+- Boss lists checked against Dungeon Journal, so the dungeon tracker finishes runs cleanly: quest and event enemies are no
+  longer listed as bosses (Veng and Maraudos in Maraudon, Verek, Mizzle the Crafty, the Scourge Invasion bosses, Stratholme
+  Courier, Spawn of Hakkar, Zarla Ober, Zin'aka).
+- New "Optional" bosses (own row in the tracker, not needed to finish a run): summoned and quest bosses such as Theldren, Mor
+  Grayhoof, Lord Valthalak, Jarien and Sothos, Ribbly Screwspigot, Sabella No-Eyes, Baron Aquanis, Princess Moira, the Fel
+  Steed, Postmaster Malown and the Stratholme smiths.
+- Rare instead of needed: Isalien, Blind Hunter, Earthcaller Halmgar, Kormok, Death Knight Darkreaver; Pyromancer Loregrain is
+  a normal boss now.
+- The Drowned City: the bosses use their real NPC IDs; Var'Taka is listed once.
+- Boss levels for the optional bosses, Ruuzlu, the Lordaeron Captain and the Mana Wraith.
+- Boss portraits: a boss without a known model (e.g. Sabella No-Eyes) asks the game for it.
+
 6.2.15 - Dungeon tracker finds more kills and the right wing
 ============================================================
 - Dungeon tracker: boss fights are recognised by their number (the same in every client language), with every boss of a

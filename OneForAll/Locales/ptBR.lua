@@ -2399,6 +2399,7 @@ FLT.LOCALES.ptBR = function() return {
   ["Shows a test tracker with made-up values; each click shows the next of five dungeons, after the fifth it closes."] = "Mostra um rastreador de teste com valores inventados; cada clique mostra a próxima de cinco masmorras e, após a quinta, ele fecha.",
   ["Bosses per row"] = "Chefes por linha",
   ["Rare - not there every time"] = "Raro - nem sempre aparece",
+  ["Optional - not needed to finish the run"] = "Opcional - não é necessário para concluir a incursão",
   ["Seen in this run"] = "Visto nesta incursão",
   ["Wing"] = "Ala",
   ["Click: choose the wing - the tracker finds it by itself, choose it here when it is wrong."] = "Clique: escolher a ala - o rastreador a detecta sozinho, escolha aqui se estiver errada.",

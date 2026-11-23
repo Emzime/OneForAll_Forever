@@ -2399,6 +2399,7 @@ FLT.LOCALES.frFR = function() return {
   ["Shows a test tracker with made-up values; each click shows the next of five dungeons, after the fifth it closes."] = "Affiche un suivi de test avec des valeurs inventées ; chaque clic montre le donjon suivant parmi cinq, après le cinquième il se ferme.",
   ["Bosses per row"] = "Boss par ligne",
   ["Rare - not there every time"] = "Rare - pas toujours présent",
+  ["Optional - not needed to finish the run"] = "Optionnel - pas nécessaire pour terminer l'expédition",
   ["Seen in this run"] = "Vu pendant cette expédition",
   ["Wing"] = "Aile",
   ["Click: choose the wing - the tracker finds it by itself, choose it here when it is wrong."] = "Clic : choisir l'aile - le suivi la trouve tout seul, choisissez-la ici si elle est fausse.",

@@ -605,7 +605,8 @@ local function bossTip(self)
   if not (d and b) then return end
   cornerTip(self)
   GameTooltip:AddLine(FLT.Name and FLT.Name(b.name) or b.name, 1, 0.82, 0.2)
-  if b.rare then GameTooltip:AddLine(L["Rare - not there every time"], 0.78, 0.80, 0.86) end
+  if b.optional then GameTooltip:AddLine(L["Optional - not needed to finish the run"], 0.78, 0.80, 0.86)
+  elseif b.rare then GameTooltip:AddLine(L["Rare - not there every time"], 0.78, 0.80, 0.86) end
   if b.rare and c and c.rareSeen and c.rareSeen[b.name] and not RT.Killed(c, b) then GameTooltip:AddLine(L["Seen in this run"], 0.85, 0.9, 1) end
   local k = RT.Killed(c, b)
   if k then GameTooltip:AddLine(string.format(L["Killed after %s"], RT.Clock(k)), 0.45, 1, 0.5) end
@@ -1097,7 +1098,10 @@ function RT.Paint(marksToo)
   local bosses = cf.hideBosses and {} or (d.bosses or {})
   frame.line:SetShown(stats and #bosses > 0)
   local nb, nRare = #bosses, 0
-  for _, b in ipairs(bosses) do if b.rare then nRare = nRare + 1 end end
+  local nOpt = 0
+  for _, b in ipairs(bosses) do if b.rare then nRare = nRare + 1; if b.optional then nOpt = nOpt + 1 end end end
+  -- the lower row: "Rare", "Optional" or both (6.2.16)
+  frame.rareL:SetText(nOpt == 0 and L["Rare"] or nOpt == nRare and L["Optional"] or (L["Rare"] .. " / " .. L["Optional"]))
   local g = bossGrid(nb - nRare, nRare, cf.perRow, stats and -70 or -32)
   if #bosses == 0 then g.height = stats and 66 or 32 end
   local gap = g.gap
