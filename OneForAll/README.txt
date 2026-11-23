@@ -71,6 +71,22 @@ and add the file to OneForAll.toc before UI\MainFrame.lua.
 Changelog (newest first)
 ========================
 
+6.2.15 - Dungeon tracker finds more kills and the right wing
+============================================================
+- Dungeon tracker: boss fights are recognised by their number (the same in every client language), with every boss of a
+  fight (Chief Ukorz with Ruuzlu, the Seven, the Lost Dwarves, Rend with Gyth); a boss counts as killed when you see its corpse
+  or loot something only it drops; boss names are learnt in your client's language. A rare boss seen alive glows.
+- Dungeon tracker: Upper Blackrock Spire, the Dire Maul wings and the Scarlet Monastery wings share one instance with their
+  other wings - the tracker now finds the right wing by the creatures you see and kill there (and Blackrock Spire's room
+  names), also after a reset or in other client languages. Before, a UBRS run showed as LBRS.
+- Dungeon tracker: a boss of the other wing killed in the same instance (LBRS first, then UBRS) ends the run and starts one
+  for that wing, counted from the first mob you killed there. In these dungeons a click on the dungeon's name chooses the
+  wing by hand (a new run when bosses are already dead); a boss kill still switches it.
+- Zul'Farrak: the Sandfury Executioner is no longer listed as a boss.
+- Boss portraits for 18 classic bosses that showed a question mark (Ruuzlu, Onyxia, the Seven, Stratholme / Scholomance /
+  Dire Maul event bosses and more); a boss without a model in our data asks the game's own Encounter Journal (Umbra, War
+  Handler Ashka, Overlord Mugg).
+
 6.2.14 - Dungeon tracker, History, OneForAll in colour and many fixes
 =====================================================================
 - New: Dungeon tracker (on by default; Quality of Life > Interface > Dungeons & Raids, with a "Test" button): a small window
