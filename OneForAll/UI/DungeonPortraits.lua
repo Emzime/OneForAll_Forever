@@ -220,7 +220,7 @@ function UI.CreateBossFrame(parent, size, withBadge, plain)
     badge:SetSize(bs, bs); badge:SetPoint("CENTER", f, "TOPLEFT", 52 * k, -206 * k)
     FLT.SetTex(badge, ASSET .. "frame_badge")
     local lv = FLT.NewFS(f, nil, "OVERLAY", size >= 64 and "GameFontHighlight" or "GameFontHighlightSmall")
-    lv:SetPoint("CENTER", badge, "CENTER", 0, 0); lv:SetTextColor(FLT.SkinC(0.96, 0.94, 0.90))
+    lv:SetPoint("CENTER", badge, "CENTER", 0, 0); lv:SetTextColor(FLT.TextC(0.96, 0.94, 0.90))
     f.badge, f.level = badge, lv
     f.SetLevel = function(self, text)
       if text and text ~= "" then badge:Show(); lv:SetText(text); lv:Show() else badge:Hide(); lv:Hide() end
